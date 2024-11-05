@@ -37,6 +37,7 @@ final readonly class ObfuscateIdValueResolver implements ValueResolverInterface
 
 	private function deobfuscateAndHydrateEntity($request, $attribute): array
 	{
+		// Remove null values verifications
 		/*
 		if ($request->attributes->get($attribute->routeParam) === null) {
 			throw new \InvalidArgumentException(sprintf('Some mandatory parameters are missing "%s" to deobfuscate', $attribute->routeParam));
