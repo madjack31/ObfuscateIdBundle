@@ -19,8 +19,9 @@ final class ObfuscateService implements ObfuscateIdInterface
 	/**
 	 * @throws RandomException
 	 */
-	public function obfuscate(int $value): string
+	public function obfuscate(?int $value): string
 	{
+		if ($value === null) return null;
 		$iv = random_bytes(openssl_cipher_iv_length(self::CIPHER));
 		$encrypted = openssl_encrypt($value, self::CIPHER, $this->secretKey, 0, $iv);
 		if ($encrypted === false) {
@@ -30,8 +31,9 @@ final class ObfuscateService implements ObfuscateIdInterface
 		return bin2hex($iv . $encrypted);
 	}
 
-	public function deobfuscate(string $value): ?int
+	public function deobfuscate(?string $value): ?int
 	{
+		if ($value === null) return null;
 		// Validate if the input is a valid hexadecimal string and has an even length
 		if (!ctype_xdigit($value) || strlen($value) % 2 !== 0) {
 			return null; // Not a valid hex string
