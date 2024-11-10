@@ -19,7 +19,7 @@ final class ObfuscateService implements ObfuscateIdInterface
 	/**
 	 * @throws RandomException
 	 */
-	public function obfuscate(?int $value): string
+	public function obfuscate(?int $value): ?string
 	{
 		if ($value === null) return null;
 		$iv = random_bytes(openssl_cipher_iv_length(self::CIPHER));
